@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="us">
+<head>
+	<meta charset="utf-8">
+	<title>Drider Engine</title>
+	<link href="jquery-ui.css" rel="stylesheet">
+  <link href="jqueryFileTree.css" rel="stylesheet" type="text/css" media="screen" />
+	<style>
+    body  {
+      margin: 0px;
+    }
+    #container {
+      background-color: yellow;
+      width: 100%;
+    }
+    #hierarchy {
+      height: 66%;
+      width: 25%;
+      background-color: red;
+    }
+    #scene {
+      height: 66%;
+      width: 50%;
+      background-color: black;
+    }
+    #inspector {
+      height: 100%;
+      width: 25%;
+      background-color: green;
+    }
+    #project {
+      height: 34%;
+      width: 75%;
+      background-color: pink;
+    }
+    .subSection {
+      height: 100%;
+      width: 100%;
+    }
+    .section {
+      position: fixed;
+    }
+	</style>
+</head>
+<body>
+  <div id="container" class="snapTarget">
+    <div id="hierarchy" class="section snapTarget">
+      <div class="subSection">
+        hola
+      </div>
+    </div>
+    <div id="scene" class="section snapTarget">
+      <div class="subSection">
+        hola
+      </div>
+    </div>
+    <div id="inspector" class="section snapTarget">
+      <div class="subSection">
+        hola
+      </div>
+    </div>
+    <div id="project" class="section snapTarget">
+      <div class="subSection">
+        hola
+      </div>
+    </div>
+  </div>
+
+<script src="external/jquery/jquery.js"></script>
+<script src="jquery-ui.js"></script>
+<script src="jquery.easing.js" type="text/javascript"></script>
+<script src="jqueryFileTree.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(document).ready( function() {
+    $('#container').css("height",$( window ).height());
+  });
+  $( window ).resize(function() {
+    $('#container').css("height",$( window ).height());
+  });
+
+</script>
+<script>
+  $( ".section" ).each(function( section ) {
+    $(this).draggable({
+      containment: "parent",
+      snap: ".snapTarget"
+    });
+  });
+  $( ".subSection" ).each(function(  ) {
+    $(this).resizable({
+      containment: "#container",
+      resize: function( event, ui ) {
+        $($(ui.element[0]).parent()[0]).css("height", ui.size.height);
+        $($(ui.element[0]).parent()[0]).css("width", ui.size.width);
+      }
+    });
+  });
+
+  </script>
+</body>
+
+</html>
